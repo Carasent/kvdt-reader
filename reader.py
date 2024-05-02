@@ -1,4 +1,5 @@
 import tabula
+import argparse
 import pandas as pd
 
 def lookup_value(data_dict, lookup_value):
@@ -7,8 +8,16 @@ def lookup_value(data_dict, lookup_value):
 
     return None
 
-pdf_path = "/Users/vadim.peretokin/Downloads/KBV_ITA_VGEX_Datensatzbeschreibung_KVDT en.pdf"
-kvdt_file_path = "/Users/vadim.peretokin/Desktop/Z05123456699_27.01.2024_12.00.con.annotated.2"
+parser = argparse.ArgumentParser(description='Process KVDT dataset.')
+parser.add_argument('--kvdt_specification', help='Path to the KVDT specification PDF')
+parser.add_argument('--kvdt_file_path', help='Path to the KVDT .con file')
+parser.add_argument('--output_path', help='Path to the output file')
+
+args = parser.parse_args()
+
+kvdt_specification = args.kvdt_specification
+kvdt_file_path = args.kvdt_file_path
+output_path = args.output_path
 
 def read_kvdt_dataset(file_path):
    # Read the PDF file and extract the tables
@@ -38,9 +47,11 @@ def read_kvdt_dataset(file_path):
 
     return updated_table_dict
 
-kvdt_description = read_kvdt_dataset(pdf_path)
+kvdt_description = read_kvdt_dataset(kvdt_specification)
 
-with open(kvdt_file_path, 'r', encoding='ISO-8859-1') as kvdt_file, open('output.txt', 'w', encoding='ISO-8859-1') as output_file:
+with open(kvdt_file_path, 'r', encoding='ISO-8859-1') as kvdt_file, open(output_path, 'w', encoding='ISO-8859-1') as output_file:
+    output_file.write("# first 3 characters are the field length, next 4 are the field identifier (FK) and the value follows afterwards\n\n")
+
     for line in kvdt_file:
         length = line[1:3]
         identifier = line[3:7]

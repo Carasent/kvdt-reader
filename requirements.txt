@@ -2,3 +2,4 @@ PyPDF2
 tabula-py
 tabula-py[jpype]
 pandas
+argparse

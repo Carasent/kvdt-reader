@@ -69,4 +69,4 @@ with open(kvdt_file_path, 'r', encoding='ISO-8859-1') as kvdt_file, open(output_
 
         output_file.write(updated_line)  # Write the updated row to the output file
 
-print("Processing completed. Output saved to output.txt.")
+print(f"Processing completed. Output saved to {kvdt_file_path}")

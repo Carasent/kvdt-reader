@@ -16,7 +16,7 @@ output_path = args.output_path
 
 
 """
-Reads and processes a KVDT (Key Value Data Table) dataset from a PDF file.
+Reads and processes a KVDT (Kassenärztliche Vereinigung-Datentransfer) dataset from a PDF file.
 
 The function takes a file path to a PDF file containing KVDT data, reads the tables from the PDF, and returns a dictionary mapping the field identifiers (FK) to their corresponding field names.
 
